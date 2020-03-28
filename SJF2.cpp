@@ -1,83 +1,70 @@
 #include<bits/stdc++.h>
-#include<cstdlib>
 
-#include<cstring>
+
 using namespace std;
 
-struct ProcessVar
+struct processList
 {
-    int prosID;
-    double arvTime;
-    double brtTime;
-    double turnAT;
-    double waitTime;
+int process;
+int arrivalTime;
+int burst;
+int completion;
+int turnaround;
+int waiting;
+int priority;
 };
-
-bool compare(ProcessVar a, ProcessVar b) // returns Ascending or Descending Sort
+bool compareArrival(processList a, processList b)
 {
-    return a.arvTime < b.arvTime; // sorts according to Arrival Time
+        return a.arrivalTime < b.arrivalTime; // sorts according to Arrival Time in ascending order
 }
+
 
 int main()
 {
 
-    vector<ProcessVar> processList;
 
+    int n,i,j;
 
-    int n;
-    cout<<"Enter the number of Processes to be created: ";
+   cout<<"Enter the number of Processes to be created: ";
     cin>>n;
     cout<<endl;
-
+    processList p1[n];
 
     cout<<"Please Enter details about Processes..."<<endl;
 
+
+
     for(int i = 0; i < n; i++)
     {
-        cout<<"For Process "<<i<<endl;
-            int p;
+        cout<<"For Process "<<i+1<<endl;
+
             cout<<"Enter Process id: ";
-            cin>>p;
+            cin>>p1[i].process;
 
-             double b1;
+            cout<<"Enter Process Arrival Time: ";
+            cin>>p1[i].arrivalTime;
+
             cout<<"Enter Burst Time: ";
-            cin>>b1;
+            cin>>p1[i].burst;
 
-            double t1;
-            cout<<"Enter Arrival Time: ";
-            cin>>t1;
-
-           processList.push_back({p, t1, b1});
-    }
-    system("cls");
-
-    cout<<"PROCESSE_ID          BURST TIME      ARRIVAL TIME"<<endl;
-    int sizeVect = processList.size();
-    for (int i=0;i<sizeVect;i++)
-    {
-
-        cout<<processList[i].prosID<<"\t\t\t"
-            <<processList[i].arvTime<<"\t\t  "<<processList[i].brtTime<<endl;
+            p1[i].waiting = 0;
+            p1[i].turnaround = 0;
+            
 
     }
 
-    sort(processList.begin(), processList.end(), compare); // sorts PROCESS structure
+    sort(p1,p1+n,compareArrival);    // sorting process according to arrival time...
+  cout<<"PROCESS\t BURST TIME\t WAITING TIME\t TURN AROUND TIME"<<endl;
+for(i=0;i<n;i++)
+{
 
-     cout<<"PROCESSE_ID          BURST TIME      ARRIVAL TIME"<<endl;
-   // int sizeVect = processList.size();
-    for (int i=0;i<sizeVect;i++)
-    {
+cout<<" "<<p1[i].process;
+cout<<"  \t "<<p1[i].burst;
+cout<<"\t\t  "<<p1[i].waiting;
+cout<<"\t\t\t  "<<p1[i].turnaround;
 
-        cout<<processList[i].prosID<<"\t\t\t"
-            <<processList[i].arvTime<<"\t\t  "<<processList[i].brtTime<<endl;
-    }
-
-
-    //cin.get();
-    //system("cls");
-
-    cout<<endl;
-
-
+cout<<"\n";
 }
 
+    return 0;
+}
