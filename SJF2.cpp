@@ -1,3 +1,4 @@
+
 #include<bits/stdc++.h>
 
 
@@ -9,14 +10,15 @@ int process; // process ID
 int arrivalTime; //process arrival time
 int burst; // process CPU Burst Time
 int completion; // process Completion Time
-int turnaround;
-int waiting;
+int turnaround; // process Turn Around Time
+int waiting; // process Waiting Time
 int priority;
 };
-bool compareArrival(processList a, processList b)
+bool compareArrival(processList a, processList b) // returns Ascending or Descending Sort
 {
-        return a.arrivalTime < b.arrivalTime; // sorts according to Arrival Time in ascending order
+        return a.arrivalTime < b.arrivalTime; // sorts according to Arrival Time
 }
+
 
 
 int main()
@@ -25,12 +27,13 @@ int main()
 
     int n,i,j;
 
-   cout<<"Enter the number of Processes to be created: ";
+    cout<<"\t\t\t\t@*@*@*@*@*@*@*@*@$ CPU SCHEDULING USING SHORTEST JOB NEXT ALGORITHM $@*@*@*@*@*@*@*@*@\n\n\n\n";
+    cout<<"\t\t\t\t\t\t\t\tPlease Enter details about Processes As follows:\n\n\n"<<endl;
+
+    cout<<"\t\t\t\t\t\tEnter the number of Processes to be created: ";
     cin>>n;
     cout<<endl;
     processList p1[n];
-
-    cout<<"Please Enter details about Processes..."<<endl;
 
 
 
@@ -55,21 +58,25 @@ int main()
 
     sort(p1,p1+n,compareArrival);    // sorting process according to arrival time...
 
-        //****finding priority****//
+
+    //****finding priority****//
 int estimatedTime=p1[0].burst;
 for(i=1;i<n;i++)
 {
 	if(estimatedTime>=p1[i].arrivalTime)
 	{
 
-	    p1[i].waiting=estimatedTime-p1[i].arrivalTime;
+            p1[i].waiting=estimatedTime-p1[i].arrivalTime;
+
+
         p1[i].priority=1+(p1[i].waiting/p1[i].burst);
 
 	}
 
+
 }
 
-system("cls");
+ system("cls");
  //cout<<"\n\n\n\n";
 int temp= 0;
  	for(i=1;i<n;i++)
@@ -93,9 +100,9 @@ int temp= 0;
 
 
 			}
-			 else if(p1[i].priority==p1[i].priority)
+			 else if(p1[i].priority==p1[j].priority)
 			{
-				if(p1[i].burst>p1[i].burst)
+				if(p1[i].burst>p1[j].burst)
 				{
 				   temp=p1[i].burst;
 				p1[i].burst=p1[j].burst;
@@ -113,7 +120,8 @@ int temp= 0;
 			}
 		}
 	}
-p1[0].completion=p1[0].burst;
+
+ p1[0].completion=p1[0].burst;
  for(i=1;i<n;i++)
  {
  	 p1[i].completion=p1[i].burst+ p1[i-1].completion;
@@ -138,7 +146,7 @@ for(i=0;i<n;i++)
 }
 cout<<"\n\n\n\t\t\t\t\t\tPROCESSES AFTER SCHEDULING";
 cout<<"\n\n\n\tProcess\t Arrival time\t Burst time\t Priority\t Completion Time\t Waiting time\t Turn Around Time\n ";
-for(i=0;i<n;i++) //display loop
+for(i=0;i<n;i++) //display loop to display output
 {
 
 cout<<"   \t P"<<p1[i].process; //process ID[i]
@@ -152,9 +160,8 @@ cout<<"\t\t\t   "<<p1[i].turnaround;
 cout<<"\n";
 }
 
-cout<<"\n\tAverage Waiting time: "<<(float)total_wait/n<<endl;
+cout<<"\n\tAverage Waiting time: "<<(float)total_wait/n<<endl;  
 cout<<"\tAverage Turn Around time: "<<(float)total_tat/n<<endl;
-
 
 
 
