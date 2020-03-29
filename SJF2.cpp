@@ -18,10 +18,7 @@ bool compareArrival(processList a, processList b)
         return a.arrivalTime < b.arrivalTime; // sorts according to Arrival Time in ascending order
 }
 
-bool comparePriority(processList a, processList b) // returns Ascending or Descending Sort
-{
-        return a.priority < b.priority; // sorts according to Priority Time in ascending order
-}
+
 int main()
 {
 
@@ -72,18 +69,47 @@ for(i=1;i<n;i++)
 
 }
 
- system("cls");
+system("cls");
  //cout<<"\n\n\n\n";
- int t; //a tempor
+int temp= 0;
  	for(i=1;i<n;i++)
 	{
 		for(j=i+1;j<n;j++)
 		{
 			if(p1[i].priority<p1[j].priority)
 			{
-				sort(p1,p1+n,comparePriority);
+				temp=p1[i].burst;
+				p1[i].burst=p1[j].burst;
+				p1[j].burst=temp;
+				temp=p1[i].process;
+				p1[i].process=p1[j].process;
+				p1[j].process=temp;
+				temp=p1[i].arrivalTime;
+				p1[i].arrivalTime=p1[j].arrivalTime;
+				p1[j].arrivalTime=temp;
+				temp=p1[i].priority;
+				p1[i].priority=p1[j].priority;
+				p1[j].priority=temp;
 
 
+			}
+			 else if(p1[i].priority==p1[i].priority)
+			{
+				if(p1[i].burst>p1[i].burst)
+				{
+				   temp=p1[i].burst;
+				p1[i].burst=p1[j].burst;
+				p1[j].burst=temp;
+				temp=p1[i].process;
+				p1[i].process=p1[j].process;
+				p1[j].process=temp;
+				temp=p1[i].arrivalTime;
+				p1[i].arrivalTime=p1[j].arrivalTime;
+				p1[j].arrivalTime=temp;
+				temp=p1[i].priority;
+				p1[i].priority=p1[j].priority;
+				p1[j].priority=temp;
+				}
 			}
 		}
 	}
