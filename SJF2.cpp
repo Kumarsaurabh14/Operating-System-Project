@@ -136,18 +136,27 @@ for(i=0;i<n;i++)
     }
 	total_wait = total_wait  + p1[i].waiting ;
 }
-
-  cout<<"PROCESS\t BURST TIME\t WAITING TIME\t TURN AROUND TIME\t Priority"<<endl;
-for(i=0;i<n;i++)
+cout<<"\n\n\n\t\t\t\t\t\tPROCESSES AFTER SCHEDULING";
+cout<<"\n\n\n\tProcess\t Arrival time\t Burst time\t Priority\t Completion Time\t Waiting time\t Turn Around Time\n ";
+for(i=0;i<n;i++) //display loop
 {
 
-cout<<" "<<p1[i].process;
-cout<<"  \t "<<p1[i].burst;
-cout<<"\t\t  "<<p1[i].waiting;
-cout<<"\t\t\t  "<<p1[i].turnaround;
-cout<<"\t\t "<<p1[i].priority;
+cout<<"   \t P"<<p1[i].process; //process ID[i]
+cout<<"\t    "<<p1[i].arrivalTime;//arrival time[i]
+cout<<"\t\t    "<<p1[i].burst;  //CPU burst time[i]
+cout<<"\t\t    "<<p1[i].priority; //WT[i]
+cout<<"\t\t    "<<p1[i].completion; //TAT[i]
+cout<<"\t\t\t   "<<p1[i].waiting;
+cout<<"\t\t\t   "<<p1[i].turnaround;
+
 cout<<"\n";
 }
+
+cout<<"\n\tAverage Waiting time: "<<(float)total_wait/n<<endl;
+cout<<"\tAverage Turn Around time: "<<(float)total_tat/n<<endl;
+
+
+
 
     return 0;
 }
