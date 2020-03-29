@@ -113,6 +113,29 @@ int temp= 0;
 			}
 		}
 	}
+p1[0].completion=p1[0].burst;
+ for(i=1;i<n;i++)
+ {
+ 	 p1[i].completion=p1[i].burst+ p1[i-1].completion;
+ }
+int total_tat = 0, total_wait = 0;
+for(i=0;i<n;i++)
+{
+	p1[i].turnaround=p1[i].completion-p1[i].arrivalTime;
+	total_tat=total_tat+p1[i].turnaround;
+
+}
+
+for(i=0;i<n;i++)
+{
+	p1[i].waiting=p1[i].turnaround-p1[i].burst;
+	if(p1[i].waiting==-1)
+    {
+        p1[i].turnaround = p1[i].completion +p1[i].arrivalTime;
+        p1[i].waiting = 0;
+    }
+	total_wait = total_wait  + p1[i].waiting ;
+}
 
   cout<<"PROCESS\t BURST TIME\t WAITING TIME\t TURN AROUND TIME\t Priority"<<endl;
 for(i=0;i<n;i++)
